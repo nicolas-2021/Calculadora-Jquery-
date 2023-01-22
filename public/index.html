@@ -16,6 +16,47 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script>
+      $(document).ready(function() {
+       clear=false;
+       calc='';
+       ans='';
+     $('button').click(function(){
+        text = $(this).val();
+         if (parseInt(text,10)==text || text=='.' || text=='*' || text=='/' || text=='+' || text=='-' || text=='%') {
+             if (clear==false) {
+                 calc+=text;
+                 $('.textbox').val(calc);
+             }else {
+                 calc=text;
+                 $('.textbox').val(calc);
+                 clear=false;
+             }
+         }else{
+             if (text=='AC') {
+                 calc='';
+                 $('.textbox').val(calc);
+             }else{
+                 if (text=='CE') {
+                     calc=calc.slice(0,-1);
+                     $('.textbox').val(calc);
+                 }else{
+                     if (text=='=') {
+                         ans=eval(calc);
+                         $('.textbox').val(ans);
+                         clear=true;
+                     }else{
+                         if (text=='ANS') {
+                             calc+=ans;
+                             $('.textbox').val(calc);
+                         }
+                     }
+                 }
+             }
+         }
+     })
+ });
+  </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -28,7 +69,33 @@
     <title>React App</title>
   </head>
   <body>
-  <div id="root"></div>
+    <div id = "Principal">  
+      <div id= "Calculadora">         
+         <input id="Pantalla" type="text" class="textbox"/>
+        <div id= "Teclado" class="buttons">
+          <button class="button" value="AC">AC</button>
+          <button class="button" value="CE">CE</button>
+          <button class="button" value="%">%</button>
+          <button class="button" value="/">/</button><br>
+          <button class="button" value="7">7</button>
+          <button class="button" value="8">8</button>
+          <button class="button" value="9">9</button>
+          <button class="button" value="*">*</button><br>
+          <button class="button" value="4">4</button>
+          <button class="button" value="5">5</button>
+          <button class="button" value="6">6</button>
+          <button class="button" value="-">-</button><br>
+          <button class="button" value="1">1</button>
+          <button class="button" value="2">2</button>
+          <button class="button" value="3">3</button>
+          <button class="button" value="+">+</button><br>
+          <button class="button" value=".">.</button>
+          <button class="button" value="0">0</button>
+          <button class="button" value="ANS">ANS</button>
+          <button class="button" value="=">=</button>
+        </div>
+      </div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
